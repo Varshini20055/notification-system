@@ -236,3 +236,37 @@ FROM notifications
 WHERE notificationType = 'Placement'
 AND createdAt >= NOW() - INTERVAL 7 DAY;
 ```
+
+
+
+# Stage 4
+
+## Performance and Scaling
+
+### Reducing Database Load
+
+- Use pagination.
+- Cache frequently accessed notifications.
+- Load only required data.
+- Use WebSocket for real-time updates.
+
+### Caching Strategy
+
+Store recently accessed notifications in cache so repeated requests do not always query the database.
+
+### Pagination
+
+Display notifications page by page instead of loading all notifications at once.
+
+Example:
+
+Page 1 → Notifications 1–10
+
+Page 2 → Notifications 11–20
+
+### Trade-offs
+
+
+- Pagination reduces database load but users see limited records per page.
+- Caching improves response time but cached data should be updated regularly.
+- WebSocket provides instant updates but requires maintaining active connections.
