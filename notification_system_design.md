@@ -122,3 +122,67 @@ Authorization: Bearer Token
 
 ## Real-Time Notifications
 
+
+
+# Stage 2
+
+## Database Choice
+
+I choose MySQL because it is reliable, easy to manage, and supports indexing and transactions.
+
+## Notification Table
+
+| Column | Type |
+|---------|------|
+| id | INT |
+| studentId | INT |
+| title | VARCHAR(100) |
+| message | TEXT |
+| notificationType | VARCHAR(30) |
+| isRead | BOOLEAN |
+| createdAt | TIMESTAMP |
+
+## Challenges with Large Data
+
+- Slow queries
+- High database load
+- More storage usage
+
+## Solutions
+
+- Create indexes on frequently used columns.
+- Use pagination.
+- Archive old notifications.
+- Optimize SQL queries.
+
+## SQL Queries
+
+### Create Notification
+
+```sql
+INSERT INTO notifications(studentId,title,message,notificationType,isRead)
+VALUES(101,'Placement Drive','TCS drive starts tomorrow','Placement',false);
+```
+
+### Get Notifications
+
+```sql
+SELECT * FROM notifications
+WHERE studentId = 101
+ORDER BY createdAt DESC;
+```
+
+### Mark as Read
+
+```sql
+UPDATE notifications
+SET isRead = true
+WHERE id = 1;
+```
+
+### Delete Notification
+
+```sql
+DELETE FROM notifications
+WHERE id = 1;
+```
