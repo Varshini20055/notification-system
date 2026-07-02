@@ -270,3 +270,7 @@ Page 2 → Notifications 11–20
 - Pagination reduces database load but users see limited records per page.
 - Caching improves response time but cached data should be updated regularly.
 - WebSocket provides instant updates but requires maintaining active connections.
+
+
+
+
