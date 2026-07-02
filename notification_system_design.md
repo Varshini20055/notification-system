@@ -161,7 +161,7 @@ I choose MySQL because it is reliable, easy to manage, and supports indexing and
 
 ```sql
 INSERT INTO notifications(studentId,title,message,notificationType,isRead)
-VALUES(101,'Placement Drive','TCS drive starts tomorrow','Placement',false);
+VALUES(101,'Placement Drive',' Drive starts tomorrow','Placement',false);
 ```
 
 ### Get Notifications
@@ -185,4 +185,54 @@ WHERE id = 1;
 ```sql
 DELETE FROM notifications
 WHERE id = 1;
+```
+
+
+
+
+# Stage 3
+
+## Query Analysis
+
+### Query
+
+```sql
+SELECT *
+FROM notifications
+WHERE studentId = 1042
+AND isRead = false
+ORDER BY createdAt ASC;
+```
+
+### Is this query efficient?
+
+The query is correct, but it may become slow when the table contains a large amount of data.
+
+### Why?
+
+- It scans many records.
+- Sorting by createdAt takes more time.
+- Performance decreases as data grows.
+
+### Index Recommendation
+
+Create a composite index on:
+
+- studentId
+- isRead
+- createdAt
+
+### Should every column be indexed?
+
+No.
+
+
+
+### Placement Notifications in the Last 7 Days
+
+```sql
+SELECT *
+FROM notifications
+WHERE notificationType = 'Placement'
+AND createdAt >= NOW() - INTERVAL 7 DAY;
 ```
